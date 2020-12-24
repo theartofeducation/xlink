@@ -1,0 +1,20 @@
+{
+  "name": "@aoeu/xlink",
+  "version": "0.0.1",
+  "description": "CLI tool for facilitating cross-project dependency linking",
+  "main": "bin/xlink.js",
+  "bin": {
+    "xlink": "./bin/xlink.js"
+  },
+  "author": "The Art of Education University",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "esm": "^3.2.25",
+    "inquirer": "^7.3.3",
+    "inquirer-file-tree-selection-prompt": "^1.0.7"
+  },
+  "peerDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
