@@ -42,7 +42,7 @@ module.exports = {
     "no-invalid-this": "off",
     "prefer-destructuring": "off",
     "require-jsdoc": "off",
-    "valid-jsdoc": "off",
+    "valid-jsdoc": "off"
   },
   overrides: [
     {
