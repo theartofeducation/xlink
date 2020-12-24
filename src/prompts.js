@@ -49,3 +49,11 @@ export const selectRestoreOriginalPackages = {
   message: "Restore original packages?",
   default: true
 }
+
+export const selectGlobalOrLocalLinkStatus = {
+  when: ({ action }) => action === "status",
+  name: "selectedStatusType",
+  type: "list",
+  message: "Global or Local status?",
+  choices: ["local", "global"]
+}

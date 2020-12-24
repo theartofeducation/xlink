@@ -17,7 +17,8 @@
     "chalk": "^4.1.0",
     "esm": "^3.2.25",
     "inquirer": "^7.3.3",
-    "inquirer-file-tree-selection-prompt": "^1.0.7"
+    "inquirer-file-tree-selection-prompt": "^1.0.7",
+    "walk-sync": "^2.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
