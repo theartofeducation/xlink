@@ -41,3 +41,11 @@ export const selectTargetPath = {
   root: path.resolve(".."),
   onlyShowDir: true
 }
+
+export const selectRestoreOriginalPackages = {
+  when: ({ action }) => action === "unlink",
+  name: "restoreOriginalPackages",
+  type: "confirm",
+  message: "Restore original packages?",
+  default: true
+}

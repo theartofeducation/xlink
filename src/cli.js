@@ -5,7 +5,8 @@ import {
   selectAction,
   selectSharedDependencies,
   selectPackages,
-  selectTargetPath
+  selectTargetPath,
+  selectRestoreOriginalPackages
 } from "./prompts"
 import {
   getPackageList
@@ -22,7 +23,8 @@ export async function main() {
     selectAction,
     selectSharedDependencies,
     selectPackages(packageList),
-    selectTargetPath
+    selectTargetPath,
+    selectRestoreOriginalPackages
   ]
   const answers = await inquirer.prompt(prompts)
 
