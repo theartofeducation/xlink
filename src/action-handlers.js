@@ -1,6 +1,8 @@
 import {
-  getStatus
-} from "./io"
+  getStatus,
+  processSelectedPackages,
+  addPackage
+} from "./commands"
 
 export const actionHandlerMap = {
   status: {
@@ -19,13 +21,41 @@ export const actionHandlerMap = {
     postAction() {}
   },
   link: {
-    preAction() {},
-    handler() {},
-    postAction() {}
+    preAction(selections) {
+      console.log("Linking local packages...")
+    },
+    handler(selections) {
+      processSelectedPackages(selections)
+    }
   },
   unlink: {
-    preAction() {},
-    handler() {},
-    postAction() {}
+    preAction() {
+      console.log("Unlinking local packages...")
+    },
+    handler(selections) {
+      processSelectedPackages(selections)
+    },
+    postAction(selections) {
+      const { restoreOriginalPackages } = selections
+
+      if (restoreOriginalPackages) {
+        console.log("Restoring original packages...")
+        const {
+          selectedSharedDependencies,
+          selectedPackages,
+          targetPath
+        } = selections
+
+        selectedSharedDependencies.forEach(pkg => addPackage({
+          pkg,
+          targetPath
+        }))
+
+        selectedPackages.forEach(pkg => addPackage({
+          pkg,
+          targetPath
+        }))
+      }
+    }
   }
 }

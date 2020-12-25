@@ -10,10 +10,8 @@ import {
   selectGlobalOrLocalLinkStatus
 } from "./prompts"
 import {
-  getPackageList,
-  linkSharedDependencies,
-  linkPackages
-} from "./io"
+  getPackageList
+} from "./commands"
 import {
   actionHandlerMap
 } from "./action-handlers"
@@ -34,43 +32,15 @@ export async function main() {
     selectGlobalOrLocalLinkStatus
   ]
   const selections = await inquirer.prompt(prompts)
-  const {
-    action,
-    selectedSharedDependencies,
-    selectedPackages,
-    targetPath
-    // restoreOriginalPackages
-  } = selections
-
+  const { action } = selections
   const { preAction, handler, postAction } = actionHandlerMap[action]
-  const shouldLinkSharedDependencies = (
-    selectedSharedDependencies &&
-    selectedSharedDependencies.length > 0
-  )
-  const shouldLinkPackages = (
-    selectedPackages &&
-    selectedPackages.length > 0
-  )
 
   if (preAction && typeof preAction === "function") {
     preAction(selections)
   }
 
-  if (shouldLinkSharedDependencies || shouldLinkPackages) {
-    linkSharedDependencies({
-      selectedSharedDependencies,
-      targetPath,
-      handler
-    })
-
-    linkPackages({
-      selectedPackages,
-      packageList,
-      targetPath,
-      handler
-    })
-  } else {
-    handler(selections)
+  if (handler && typeof handler === "function") {
+    handler({ ...selections, packageList })
   }
 
   if (postAction && typeof postAction === "function") {
