@@ -133,7 +133,7 @@ export function linkPackage({
   linkFromDir,
   linkTargetPath
 }) {
-  console.log(`"${pkg}" -> ${linkTargetPath}`)
+  console.log(`Linking ${pkg} -> ${linkTargetPath}`)
   execSync("yarn link", { cwd: linkFromDir }, handleExecSyncResult)
   execSync(`yarn link "${pkg}"`, { cwd: linkTargetPath }, handleExecSyncResult)
 }
@@ -143,7 +143,7 @@ export function unlinkPackage({
   linkFromDir,
   linkTargetPath
 }) {
-  console.log(`Unlinking "${pkg}" from ${linkTargetPath}`)
+  console.log(`Unlinking ${pkg} from ${linkTargetPath}`)
   execSync(`yarn unlink "${pkg}"`, { cwd: linkTargetPath }, handleExecSyncResult)
   execSync("yarn unlink", { cwd: linkFromDir }, handleExecSyncResult)
 }
