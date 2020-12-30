@@ -8,13 +8,36 @@
   },
   "author": "The Art of Education University",
   "license": "MIT",
+  "scripts": {
+    "lint": "yarn run eslint && yarn run mdlint",
+    "eslint": "eslint --ext .js src",
+    "mdlint": "markdownlint \"**/*.{md,mdx}\" --ignore \"**/node_modules/**\" --ignore \"**/CHANGELOG.md\""
+  },
   "dependencies": {
     "chalk": "^4.1.0",
     "esm": "^3.2.25",
     "inquirer": "^7.3.3",
-    "inquirer-file-tree-selection-prompt": "^1.0.7"
+    "inquirer-file-tree-selection-prompt": "^1.0.7",
+    "walk-sync": "^2.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "eslint": "^7.16.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "husky": "^4.3.6",
+    "markdownlint": "^0.22.0",
+    "markdownlint-cli": "^0.26.0"
   },
   "peerDependencies": {
     "lerna": "^3.22.1"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "yarn run lint"
+    }
   }
 }

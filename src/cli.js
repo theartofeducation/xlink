@@ -5,11 +5,16 @@ import {
   selectAction,
   selectSharedDependencies,
   selectPackages,
-  selectTargetPath
+  selectTargetPath,
+  selectRestoreOriginalPackages,
+  selectGlobalOrLocalLinkStatus
 } from "./prompts"
 import {
   getPackageList
-} from "./io"
+} from "./commands"
+import {
+  actionHandlerMap
+} from "./action-handlers"
 
 export async function main() {
   console.log(`xlink v${pkg.version}\n`)
@@ -22,9 +27,23 @@ export async function main() {
     selectAction,
     selectSharedDependencies,
     selectPackages(packageList),
-    selectTargetPath
+    selectTargetPath,
+    selectRestoreOriginalPackages,
+    selectGlobalOrLocalLinkStatus
   ]
-  const answers = await inquirer.prompt(prompts)
+  const selections = await inquirer.prompt(prompts)
+  const { action } = selections
+  const { preAction, handler, postAction } = actionHandlerMap[action]
 
-  console.log({ answers })
+  if (preAction && typeof preAction === "function") {
+    preAction(selections)
+  }
+
+  if (handler && typeof handler === "function") {
+    handler({ ...selections, packageList })
+  }
+
+  if (postAction && typeof postAction === "function") {
+    postAction(selections)
+  }
 }

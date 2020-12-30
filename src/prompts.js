@@ -41,3 +41,19 @@ export const selectTargetPath = {
   root: path.resolve(".."),
   onlyShowDir: true
 }
+
+export const selectRestoreOriginalPackages = {
+  when: ({ action }) => action === "unlink",
+  name: "restoreOriginalPackages",
+  type: "confirm",
+  message: "Restore original packages?",
+  default: true
+}
+
+export const selectGlobalOrLocalLinkStatus = {
+  when: ({ action }) => action === "status",
+  name: "selectedStatusType",
+  type: "list",
+  message: "Global or Local status?",
+  choices: ["local", "global"]
+}
