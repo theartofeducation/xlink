@@ -1,0 +1,8 @@
+# env files
+.env
+.DS_Store
+
+node_modules
+.github
+*-error.log
+*-debug.log
