@@ -1,6 +1,6 @@
 {
   "name": "@aoeu/xlink",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "CLI tool for facilitating cross-project dependency linking",
   "main": "bin/xlink.js",
   "bin": {
@@ -8,6 +8,9 @@
   },
   "author": "The Art of Education University",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "yarn run eslint && yarn run mdlint",
     "eslint": "eslint --ext .js src",
